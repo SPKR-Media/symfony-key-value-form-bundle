@@ -11,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class KeyValueRowType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options) : void
     {
         if (null === $options['allowed_keys']) {
             $builder->add('key', $options['key_type'], $options['key_options']);
@@ -30,7 +30,7 @@ class KeyValueRowType extends AbstractType
         return $this->getBlockPrefix();
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix() : string
     {
         return 'burgov_key_value_row';
     }
@@ -40,7 +40,7 @@ class KeyValueRowType extends AbstractType
         $this->configureOptions($resolver);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver) : void
     {
         // check if Form component version 2.8+ is used
         $isSf28 = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix');

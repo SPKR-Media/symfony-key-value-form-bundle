@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class KeyValueType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options) : void
     {
         $builder->addModelTransformer(new HashToKeyValueArrayTransformer($options['use_container_object']));
 
@@ -37,12 +37,12 @@ class KeyValueType extends AbstractType
         }, 1);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver) 
     {
         $this->configureOptions($resolver);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver) : void
     {
         // check if Form component version 2.8+ is used
         $isSf28 = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix');
@@ -78,7 +78,7 @@ class KeyValueType extends AbstractType
         }
     }
 
-    public function getParent()
+    public function getParent() : ?string
     {
         return method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix') ? 'Symfony\Component\Form\Extension\Core\Type\CollectionType' : 'collection';
     }
@@ -88,7 +88,7 @@ class KeyValueType extends AbstractType
         return $this->getBlockPrefix();
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix() : string
     {
         return 'burgov_key_value';
     }
